@@ -15,6 +15,16 @@ Object.defineProperty(Vue.prototype, '$moment', {
 
 import App from './components/App.vue';
 
+let events = window.__INITIAL_STATE__.map(event => {
+    return {
+        description: event.description,
+        date: moment(event.date)
+    }
+});
+
+let initialState = Object.assign({}, store.state, {events: events});
+store.replaceState(initialState);
+
 new Vue({
     el: '#app',
     data: {
@@ -23,5 +33,5 @@ new Vue({
     components: {
         App
     },
-    store : store
+    store: store
 });
